@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Parent window</title>
+	<script type="text/javascript" src="message-service.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var node = document.createElement('iframe');
+            node.id = 'child_frame';
+
+			var token = generateToken(6);
+			token = "AAAA";
+            node.src = "child.html?token="+token;
+            document.getElementsByTagName('body')[0].appendChild(node);
+            node.onload = function() {
+            	var messageService = new MessageService(token, node.contentWindow);
+				messageService.registerMessageListener('childToParent', function(params) {
+	                    console.log("message received from child");
+	                    if(params) {
+	                    	console.log("with params : "+params);
+	                    }
+	            });
+            	messageService.sendMessage('parentToChild', [1, "2nd arg"]);
+            };
+		};
+
+
+		function generateToken(length)
+        {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for( var i=0; i < length; i++ )
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+	</script>
+</head>
+<body>
+</body>
+</html>

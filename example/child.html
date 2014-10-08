@@ -1,0 +1,32 @@
+<html>
+<head>
+	<title>Child window</title>
+	<script type="text/javascript" src="message-service.js"></script>
+	<script type="text/javascript">
+		var urlParams;
+		(window.onpopstate = function () {
+		    var match,
+		        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+		        search = /([^&=]+)=?([^&]*)/g,
+		        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+		        query  = window.location.search.substring(1);
+
+		    urlParams = {};
+		    while (match = search.exec(query))
+		       urlParams[decode(match[1])] = decode(match[2]);
+		})();
+
+		var messageService = new MessageService(urlParams['token'], parent);
+		messageService.registerMessageListener('parentToChild', function(params) {
+                    console.log("message received from parent");
+                    if(params) {
+                    	console.log("with params : "+params);
+                    }
+        });
+		messageService.sendMessage('childToParent');
+	</script>
+</head>
+<body>
+Child window
+</body>
+</html>
