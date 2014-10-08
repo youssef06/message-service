@@ -18,13 +18,14 @@ Parent page:
 ```
 var node = document.createElement('iframe');
 node.id = 'child_iframe';
-/*  this could be generated on server side as well as on the client  */
+/**  this could be generated on server side as well as on the client  **/
 var token = "randomToken"; 
 node.src = "CHILD_URL?token=" + token;
 document.getElementsByTagName('body')[0].appendChild(node);
-/* 
-   Once the iframe is loaded we create our messageService Object that will         allow us  to send/receive messages to/from the created iframe
-   */
+/**
+   Once the iframe is loaded we create our messageService Object 
+   that will allow us to send/receive messages to/from the created iframe
+ **/
 node.onload = function() {
   var messageService = new MessageService(token, node.contentWindow);
   messageService.registerMessageListener('childToParent', function(params) {
@@ -36,7 +37,8 @@ node.onload = function() {
   messageService.sendMessage('parentToChild', [1, "2nd arg"]);
 };
 ```
-Iframe page!
+
+Iframe page:
 ```
 var messageService = new MessageService(urlParams['token'], parent);
 messageService.registerMessageListener('parentToChild', function(params) {
