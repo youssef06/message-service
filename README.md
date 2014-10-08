@@ -8,7 +8,7 @@ It's intended use is for when a parent page creates an iframe and wants to commu
 Install
 -------------
 You will need to install this JS on the parent page as well as on the iframe page.
-```
+```html
 <script type="text/javascript" src="path/to/message-service.js"></script>
 ```
 ----------
