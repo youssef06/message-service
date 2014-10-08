@@ -15,7 +15,7 @@ You will need to install this JS on the parent page as well as on the iframe pag
 Usage
 -------------
 Parent page:
-```
+```javascript
 var node = document.createElement('iframe');
 node.id = 'child_iframe';
 /**  this could be generated on server side as well as on the client  **/
@@ -39,7 +39,7 @@ node.onload = function() {
 ```
 
 Iframe page:
-```
+```javascript
 var messageService = new MessageService(urlParams['token'], parent);
 messageService.registerMessageListener('parentToChild', function(params) {
   console.log("message received from parent");
