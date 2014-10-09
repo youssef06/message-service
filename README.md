@@ -1,4 +1,4 @@
-MessageService!
+MessageService
 ===================
 
 A simple javascript library for Cross-window messaging, internally it uses window.postMessage which is supported by all modern browsers including IE8. It allows windows/frames from multiple domains to communicate with each other.
